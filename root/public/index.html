@@ -1,11 +1,93 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- PWA Metadata -->
+  <meta name="description" content="Cheery Daifuku - Εφαρμογή">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.webmanifest">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  
+  <!-- iOS PWA Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png">
+  
+  <!-- Fonts & CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  
   <title>Cheery Daifuku</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+    }
+    
+    #root {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Προσθήκη στυλ για offline κατάσταση */
+    .offline-header {
+      background: #ff6b6b;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+  <!-- Offline Indicator -->
+  <div class="offline-header" id="offline-status" style="display:none;">
+    Λειτουργείτε εκτός σύνδεσης
+  </div>
+  
   <div id="root"></div>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    // Online/Offline detection
+    window.addEventListener('load', () => {
+      const offlineStatus = document.getElementById('offline-status');
+      
+      function updateOnlineStatus() {
+        if (navigator.onLine) {
+          offlineStatus.style.display = 'none';
+        } else {
+          offlineStatus.style.display = 'block';
+        }
+      }
+      
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+      
+      // Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('%PUBLIC_URL%/sw.js')
+          .then(reg => {
+            console.log('Service Worker registered:', reg);
+          })
+          .catch(err => {
+            console.error('Service Worker registration failed:', err);
+          });
+      }
+    });
+  </script>
 </body>
 </html>
