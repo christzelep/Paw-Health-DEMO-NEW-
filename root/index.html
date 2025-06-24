@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5">
+    <title>DogTrainPro - Professional Dog Training</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #d1fae5 0%, #dbeafe 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            color: var(--secondary);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            opacity: 0.9;
+        }
+        
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%234f46e510" d="M20,20 Q40,5 50,30 T80,20 Q95,40 80,50 T95,80 Q80,95 50,80 T20,95 Q5,80 20,50 T5,20 Q20,5 50,20 Z"/></svg>');
+            background-size: 150px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+        }
+        
+        .feature-card:hover:after {
+            transform: scaleX(1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card .btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .notes-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            resize: vertical;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .note {
+            background: #f0fdfa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary);
+            position: relative;
+        }
+        
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .note-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .note-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .note-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .note-actions button:hover {
+            color: var(--primary);
+        }
+        
+        .progress-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+        
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .skill {
+            margin-bottom: 25px;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .skill-bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .challenge-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+            border-radius: 16px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            color: white;
+            text-align: center;
+        }
+        
+        .challenge-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .challenge-section p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .testimonial:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--dark);
+        }
+        
+        .client {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .install-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0 20px;
+        }
+        
+        #installBtn {
+            background: var(--dark);
+            color: white;
+            font-size: 1.1rem;
+            padding: 15px 40px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animation for install button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Training tracker */
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tracker-day {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tracker-day.completed {
+            background: #f0fdf4;
+            border-color: var(--secondary);
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .tracker-day:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-paw"></i>
+            <span>DogTrainPro</span>
+        </div>
+        <div class="cta-buttons">
+            <button id="installButton" class="btn">
+                <i class="fas fa-download"></i> Install App
+            </button>
+            <a href="https://tinyurl.com/DogFreeTrainingCl" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-gift"></i> Free Personal Trainer
+            </a>
+            <button class="btn btn-primary">
+                <i class="fas fa-crown"></i> Upgrade to Pro
+            </button>
+        </div>
+    </header>
+    
+    <div class="hero">
+        <span class="badge"><i class="fas fa-star"></i> NEW FEATURE: Training Tracker</span>
+        <h1>Transform Your Dog's Behavior Like a Pro</h1>
+        <p>Professional training techniques used by experts worldwide. Access personalized lessons anytime, anywhere and track your progress with our advanced tools.</p>
+        <button class="btn btn-accent">
+            <i class="fas fa-play"></i> Start Training Now
+        </button>
+    </div>
+    
+    <div class="features">
+        <div class="feature-card">
+            <i class="fas fa-dog"></i>
+            <h3>Basic Commands</h3>
+            <p>Step-by-step guides for sit, stay, come, and heel commands with video demonstrations.</p>
+            <button class="btn btn-primary">View Lessons</button>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-ban"></i>
+            <h3>Behavior Correction</h3>
+            <p>Solutions for barking, chewing, jumping, and other common behavioral issues.</p>
+            <button class="btn btn-primary">Solve Problems</button>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-trophy"></i>
+            <h3>Advanced Tricks</h3>
+            <p>Impress friends with roll over, play dead, fetch specific items, and more.</p>
+            <button class="btn btn-primary">Learn Tricks</button>
+        </div>
+    </div>
+    
+    <div class="progress-section">
+        <div class="section-header">
+            <h2><i class="fas fa-chart-line"></i> Training Progress</h2>
+            <button class="btn btn-primary" id="addSkillBtn">
+                <i class="fas fa-plus"></i> Add Skill
+            </button>
+        </div>
+        <p>Track your dog's progress in different training areas. Update the progress as your dog improves.</p>
+        
+        <div class="progress-container">
+            <div class="skill">
+                <div class="skill-header">
+                    <span>Basic Obedience</span>
+                    <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%"></div>
+                </div>
+            </div>
+            
+            <div class="skill">
+                <div class="skill-header">
+                    <span>Leash Training</span>
+                    <span>50%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 50%"></div>
+                </div>
+            </div>
+            
+            <div class="skill">
+                <div class="skill-header">
+                    <span>Socialization</span>
+                    <span>30%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 30%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="challenge-section">
+        <h2>Weekly Training Challenge</h2>
+        <p>Join thousands of dog owners in this week's challenge: "Perfect Recall in 7 Days". Improve your dog's response to the "Come" command with daily exercises.</p>
+        <button class="btn btn-accent">
+            <i class="fas fa-flag"></i> Join Challenge Now
+        </button>
+    </div>
+    
+    <div class="notes-section">
+        <div class="section-header">
+            <h2><i class="fas fa-clipboard"></i> Training Notes</h2>
+            <button class="btn btn-primary" onclick="showNoteModal()">
+                <i class="fas fa-plus"></i> Add Note
+            </button>
+        </div>
+        <p>Track your dog's progress with our integrated notes system. Add observations, milestones, and training insights.</p>
+        
+        <div id="notesContainer" class="notes-list"></div>
+    </div>
+    
+    <div class="testimonials">
+        <div class="testimonial">
+            <div class="testimonial-content">
+                "This app completely transformed my relationship with my German Shepherd. The step-by-step lessons made training so easy!"
+            </div>
+            <div class="client">
+                <div class="client-avatar">MK</div>
+                <div>
+                    <strong>Maria K.</strong>
+                    <div>Dog Owner for 3 years</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <div class="testimonial-content">
+                "The progress tracking features helped me stay consistent. My dog learned 5 new tricks in just 2 weeks!"
+            </div>
+            <div class="client">
+                <div class="client-avatar">TS</div>
+                <div>
+                    <strong>Thomas S.</strong>
+                    <div>Professional Trainer</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <div class="testimonial-content">
+                "The free personal trainer offer was amazing! Got personalized advice that solved my dog's barking problem."
+            </div>
+            <div class="client">
+                <div class="client-avatar">EJ</div>
+                <div>
+                    <strong>Emma J.</strong>
+                    <div>New Dog Owner</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="install-container">
+        <button id="installBtn" class="btn pulse">
+            <i class="fas fa-download"></i> Install App for Full Experience
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2023 DogTrainPro. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Training Resources</a>
+        </div>
+        <p>Follow us: 
+            <a href="#"><i class="fab fa-facebook"></i></a> 
+            <a href="#"><i class="fab fa-instagram"></i></a> 
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </p>
+    </footer>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:30px; border-radius:16px; max-width:600px; width:90%;">
+            <h2 style="margin-bottom:20px;"><i class="fas fa-edit"></i> Add Training Note</h2>
+            <textarea id="noteInput" placeholder="Add notes about today's training session..." style="width:100%; height:150px; padding:15px; margin-bottom:20px;"></textarea>
+            <div style="display:flex; gap:10px; justify-content:flex-end;">
+                <button class="btn" onclick="document.getElementById('noteModal').style.display='none'">Cancel</button>
+                <button class="btn btn-primary" onclick="saveNote()">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PWA Installation
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const installButton = document.getElementById('installButton');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+            installButton.style.display = 'inline-flex';
+            installBtn.classList.add('pulse');
+        });
+        
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+        
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installButton.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+        
+        // Notes System
+        function showNoteModal() {
+            document.getElementById('noteInput').value = '';
+            document.getElementById('noteModal').style.display = 'flex';
+        }
+        
+        function saveNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+            
+            if (noteText) {
+                const notesContainer = document.getElementById('notesContainer');
+                const timestamp = new Date().toLocaleString();
+                
+                const noteElement = document.createElement('div');
+                noteElement.className = 'note';
+                noteElement.innerHTML = `
+                    <div class="note-header">
+                        <div class="note-date">${timestamp}</div>
+                        <div class="note-actions">
+                            <button onclick="editNote(this)"><i class="fas fa-edit"></i></button>
+                            <button onclick="deleteNote(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <p>${noteText}</p>
+                `;
+                
+                notesContainer.prepend(noteElement);
+                saveNoteToStorage(noteText, timestamp);
+                noteInput.value = '';
+                document.getElementById('noteModal').style.display = 'none';
+            }
+        }
+        
+        function editNote(button) {
+            const noteElement = button.closest('.note');
+            const noteText = noteElement.querySelector('p').textContent;
+            const noteDate = noteElement.querySelector('.note-date').textContent;
+            
+            document.getElementById('noteInput').value = noteText;
+            document.getElementById('noteModal').style.display = 'flex';
+            
+            // Remove the original note
+            deleteNote(button);
+        }
+        
+        function deleteNote(button) {
+            const noteElement = button.closest('.note');
+            const noteText = noteElement.querySelector('p').textContent;
+            noteElement.remove();
+            
+            // Remove from storage
+            let notes = JSON.parse(localStorage.getItem('dogTrainingNotes')) || [];
+            notes = notes.filter(note => note.text !== noteText);
+            localStorage.setItem('dogTrainingNotes', JSON.stringify(notes));
+        }
+        
+        function saveNoteToStorage(text, timestamp) {
+            let notes = JSON.parse(localStorage.getItem('dogTrainingNotes')) || [];
+            notes.unshift({ text, timestamp });
+            localStorage.setItem('dogTrainingNotes', JSON.stringify(notes));
+        }
+        
+        function loadNotes() {
+            const notes = JSON.parse(localStorage.getItem('dogTrainingNotes')) || [];
+            const notesContainer = document.getElementById('notesContainer');
+            
+            notesContainer.innerHTML = '';
+            
+            notes.forEach(note => {
+                const noteElement = document.createElement('div');
+                noteElement.className = 'note';
+                noteElement.innerHTML = `
+                    <div class="note-header">
+                        <div class="note-date">${note.timestamp}</div>
+                        <div class="note-actions">
+                            <button onclick="editNote(this)"><i class="fas fa-edit"></i></button>
+                            <button onclick="deleteNote(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <p>${note.text}</p>
+                `;
+                notesContainer.appendChild(noteElement);
+            });
+        }
+        
+        // Training Tracker
+        function setupTrainingTracker() {
+            const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const container = document.createElement('div');
+            container.className = 'tracker-grid';
+            
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+            days.forEach((day, index) => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'tracker-day';
+                dayElement.textContent = day;
+                
+                if (index < today) {
+                    dayElement.classList.add('completed');
+                }
+                
+                dayElement.addEventListener('click', () => {
+                    dayElement.classList.toggle('completed');
+                    saveTrackerState();
+                });
+                
+                container.appendChild(dayElement);
+            });
+            
+            document.querySelector('.progress-section').appendChild(container);
+            loadTrackerState();
+        }
+        
+        function saveTrackerState() {
+            const completedDays = [];
+            document.querySelectorAll('.tracker-day.completed').forEach(day => {
+                completedDays.push(day.textContent);
+            });
+            localStorage.setItem('trainingTracker', JSON.stringify(completedDays));
+        }
+        
+        function loadTrackerState() {
+            const completedDays = JSON.parse(localStorage.getItem('trainingTracker')) || [];
+            document.querySelectorAll('.tracker-day').forEach(day => {
+                if (completedDays.includes(day.textContent)) {
+                    day.classList.add('completed');
+                }
+            });
+        }
+        
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered: ', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed: ', error);
+                    });
+            });
+        }
+        
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            loadNotes();
+            setupTrainingTracker();
+        });
+    </script>
+</body>
+</html>
