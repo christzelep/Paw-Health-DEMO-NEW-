@@ -1,17 +1,8 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Service-Worker-Allowed = "/"
-
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
 [build]
-  publish = "dist"
-  command = "npm run build"
+  command = "npm run build"  # Your build command
+  publish = "build"          # Your build output directory
 
-[dev]
-  framework = "#static"
-  targetPort = 3000
-  autoLaunch = true
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
